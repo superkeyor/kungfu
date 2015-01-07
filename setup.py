@@ -76,7 +76,7 @@ setup(
     # For example:
     # install_requires = ['django-pipeline==1.1.22', 'south>=0.7'],
     # install_requires=['wxpython>=2.9', 'wxpython<3.0'],
-    install_requires=['pandas','openpyxl'],
+    install_requires=['pandas==0.12.0','openpyxl==1.5.8'],
 
     # List additional groups of dependencies here (e.g. development dependencies).
     # You can install these using the following syntax, for example:

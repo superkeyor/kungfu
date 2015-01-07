@@ -12,7 +12,8 @@ python setup.py sdist upload
 
 rm -r *.egg-info
 
-# pip install kungfu --upgrade
+# --upgrade will also update pandas...
+# pip uninstall kungfu; pip install kungfu
 
 # do not use this, seems not working??
 # Although not required, it’s common to locally install your project in “develop” or “editable” mode 
