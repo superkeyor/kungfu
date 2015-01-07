@@ -1,5 +1,8 @@
 kungfu
 =========
+https://pypi.python.org/pypi/kungfu
+pip install kungfu
+
 jerryzhujian9 at gmail [\/dot/\] com
 Tested under python 2.7
 To see your python version
