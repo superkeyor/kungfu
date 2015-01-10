@@ -1,30 +1,25 @@
-kungfu
-=========
-https://pypi.python.org/pypi/kungfu
-pip install kungfu
-
-jerryzhujian9 at gmail [\/dot/\] com
+An enhancement to pandas module.
+This is kungfu, with monkey-patched common methods to (Data)Frame and Series in pandas.
+=============================================
+jerryzhujian9_at_gmail.com
 Tested under python 2.7
 To see your python version
 in terminal: python -V
 or in python: import sys; print (sys.version)
+=============================================
+Install:
+https://pypi.python.org/pypi/kungfu
+pip install kungfu
+The above command will auto take care of the following requirements
+Requires pandas 0.12.0 (tested 0.12.0-2) which will also install numpy etc
+Requires openpyxl 1.5.8 (version 1.6.1 or higher, but lower than 2.0.0 may also work, but not tested)
+(pip install pandas==0.12.0; pip install openpyxl==1.5.8)
 
-requires pandas 0.12.0 (tested 0.12.0-2) which will also install numpy etc
-download it from https://pypi.python.org/pypi/pandas/0.12.0
-or pip install pandas==0.12.0
-requires openpyxl version 1.6.1 or higher, but lower than 2.0.0 (tested 1.5.8)
-https://pypi.python.org/pypi/openpyxl/1.5.8
-pip install openpyxl==1.5.8
-=========
-"""An enhancement to pandas module.
-
-This is kungfu, with monkey-patched common methods to (Data)Frame and Series in pandas.
-Want pandas functions index?  http://pandas.pydata.org/pandas-docs/dev/genindex.html
 
 Usage:
-1) import
+Want pandas functions index?  http://pandas.pydata.org/pandas-docs/dev/genindex.html
 
-2) call methods
+Call methods
 All the monkey-patched methods use UpperCase names; the original ones use lower_case names.
 Generally all of the calling (monkey-patched or not) returns something and the original frame or series remains unchanged.
 If user wants the original frame or series to be changed, assign the returns back.
@@ -79,7 +74,7 @@ concatvh = ConcatVH
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # Frame IO, Frame info
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-frame = Frame.Read(path, sep="\t", header=0)
+frame = Frame.Read(path, sep="	", header=0)
     Read data into a frame. This is a class method.
     Args:
         path, a text or csv file
@@ -409,7 +404,7 @@ series.Uniques()
 
 series.Size()
     returns the number of values in a series (i.e. series length), takes no argument. Frame does not have a size method
-
+    
 series.Indices()
     returns a list of indices of the series, takes no argument
 

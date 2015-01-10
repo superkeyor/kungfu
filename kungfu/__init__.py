@@ -1,3 +1,3 @@
 from kungfu import *
-__doc__ = kungfu.__doc__
-from packageversion import __version__
+from kungfu import __doc__
+from version import __version__
