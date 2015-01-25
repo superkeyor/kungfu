@@ -19,10 +19,12 @@ The above command will auto take care of the following requirements
 Requires pandas 0.12.0 (tested 0.12.0-2) which will also install numpy etc
 Requires openpyxl (tested with 1.5.8, version 1.6.1 or higher, but lower than 2.0.0 may also work.)
 (pip install pandas==0.12.0; pip install openpyxl==1.5.8)
+depend on python-dateutil==1.5, numpy (1.6.1 or higher, tested 1.9, however 1.7.1 does not work??)
 
 
 Usage:
-Want pandas functions index?  http://pandas.pydata.org/pandas-docs/dev/genindex.html
+Want pandas functions index?
+http://pandas.pydata.org/pandas-docs/version/0.12.0/
 
 Call methods
 All the monkey-patched methods use UpperCase names; the original ones use lower_case names.
