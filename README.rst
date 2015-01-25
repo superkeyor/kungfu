@@ -12,8 +12,8 @@ https://pypi.python.org/pypi/kungfu
 pip install kungfu
 The above command will auto take care of the following requirements
 Requires pandas 0.12.0 (tested 0.12.0-2) which will also install numpy etc
-Requires openpyxl (version 1.6.1 or higher, but lower than 2.0.0 may also work.  tested with 1.5.8, 1.6.2)
-(pip install pandas==0.12.0; pip install openpyxl==1.6.2)
+Requires openpyxl (tested with 1.5.8, version 1.6.1 or higher, but lower than 2.0.0 may also work.)
+(pip install pandas==0.12.0; pip install openpyxl==1.5.8)
 
 
 Usage:
