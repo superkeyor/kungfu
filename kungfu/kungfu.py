@@ -90,6 +90,10 @@ frame = Frame.Read(path, sep="\t", header=0)
         a Frame object with the data.
     Raises:
         None
+        
+frame = Frame.Readx(path, sheetname='Sheet1', header=0)
+    Read xlsx, xls file into a frame
+    header, the row number with header (0=first row, None=no header at all)
 
 frame.Print([column=None])
     Print out common useful information of a frame.
@@ -532,6 +536,21 @@ class PatchedFrame(Frame):
            None
         """
         return pd.read_table(*args, **kwargs)
+        
+    def Readx(cls, *args, **kwargs):
+        """
+        Readx(path, sheetname='Sheet1', header=0)
+        Read xlsx, xls file into a frame
+        Args:
+            path, a xlsx, xls file file
+            sep, character used to separate the file
+            header, the row number with header (0=first row, None=no header at all)
+        Returns:
+            a Frame object with the data
+        Raises:
+           None
+        """
+        return pd.read_excel(*args, **kwargs)        
 
     def Save(self, outputFile, columns=None):
         """
@@ -1434,6 +1453,7 @@ def ConcatVH(frameList, axis=0, join="union", sort=False):
 from pandas import isnull as isna
 from pandas import isnull as isnull
 Frame.read = Frame.Read
+Frame.readx = Frame.Readx
 Frame.save = Frame.Save
 Frame.write = Frame.Save
 Frame.pprint = Frame.Print

@@ -85,6 +85,10 @@ frame = Frame.Read(path, sep="	", header=0)
         a Frame object with the data.
     Raises:
         None
+        
+frame = Frame.Readx(path, sheetname='Sheet1', header=0)
+    Read xlsx, xls file into a frame
+    header, the row number with header (0=first row, None=no header at all)
 
 frame.Print([column=None])
     Print out common useful information of a frame.
