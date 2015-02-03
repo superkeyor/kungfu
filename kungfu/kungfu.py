@@ -537,7 +537,8 @@ class PatchedFrame(Frame):
            None
         """
         return pd.read_table(path, sep=',', header=0, *args, **kwargs)
-        
+    
+    @classmethod
     def Readx(cls, path, sheetname='Sheet1', header=0, *args, **kwargs):
         """
         (path, sheetname='Sheet1', header=0, *args, **kwargs)
