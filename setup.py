@@ -13,7 +13,7 @@ packages = find_packages()
 # packages.append('ez.timezone.pytz')
 # install_requires = ['django-pipeline==1.1.22', 'south>=0.7']
 # install_requires=['peppercorn']
-install_requires=['pandas==0.12.0','openpyxl==1.5.8']
+install_requires=['pandas==0.12.0','openpyxl==1.5.8', 'xlrd']
 ######################################################################################
 # Get the long description from the relevant file
 with open(path.join(here, 'README.rst'), encoding='utf-8') as f:

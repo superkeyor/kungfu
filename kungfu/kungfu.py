@@ -17,8 +17,9 @@ https://pypi.python.org/pypi/kungfu
 pip install kungfu
 The above command will auto take care of the following requirements
 Requires pandas 0.12.0 (tested 0.12.0-2) which will also install python-dateutil(dateutil), numpy, pytz, six
-Requires openpyxl (tested with 1.5.8, version 1.6.1 or higher, but lower than 2.0.0 may also work.)
-(pip install pandas==0.12.0; pip install openpyxl==1.5.8)
+Requires openpyxl for writing excel (tested with 1.5.8, version 1.6.1 or higher, but lower than 2.0.0 may also work.)
+xlrd for reading excel
+(pip install pandas==0.12.0; pip install openpyxl==1.5.8; pip install xlrd)
 
 
 Usage:
