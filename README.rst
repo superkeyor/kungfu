@@ -75,11 +75,11 @@ concatvh = ConcatVH
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # Frame IO, Frame info
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-frame = Frame.Read(path, sep="	", header=0)
+frame = Frame.Read(path, sep=",", header=0)
     Read data into a frame. This is a class method.
     Args:
         path, a text or csv file
-        sep, character used to separate the file
+        sep, character used to separate the file, e.g., '	'
         header, the row number with header (0=first row, None=no header at all)
     Returns:
         a Frame object with the data.

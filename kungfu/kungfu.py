@@ -80,11 +80,11 @@ concatvh = ConcatVH
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # Frame IO, Frame info
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-frame = Frame.Read(path, sep="\t", header=0)
+frame = Frame.Read(path, sep=",", header=0)
     Read data into a frame. This is a class method.
     Args:
         path, a text or csv file
-        sep, character used to separate the file
+        sep, character used to separate the file, e.g., '\t'
         header, the row number with header (0=first row, None=no header at all)
     Returns:
         a Frame object with the data.
@@ -523,8 +523,9 @@ class PatchedFrame(Frame):
     __metaclass__ = monkeypatch_class
 
     @classmethod
-    def Read(cls, *args, **kwargs):
+    def Read(cls, path, sep=',', header=0, *args, **kwargs):
         """
+        (path, sep=',', header=0, *args, **kwargs)
         Read data into a frame. This is a class method.
         Args:
             path, a text or csv file
@@ -535,11 +536,11 @@ class PatchedFrame(Frame):
         Raises:
            None
         """
-        return pd.read_table(*args, **kwargs)
+        return pd.read_table(path, sep=',', header=0, *args, **kwargs)
         
-    def Readx(cls, *args, **kwargs):
+    def Readx(cls, path, sheetname='Sheet1', header=0, *args, **kwargs):
         """
-        Readx(path, sheetname='Sheet1', header=0)
+        (path, sheetname='Sheet1', header=0, *args, **kwargs)
         Read xlsx, xls file into a frame
         Args:
             path, a xlsx, xls file file
@@ -550,7 +551,7 @@ class PatchedFrame(Frame):
         Raises:
            None
         """
-        return pd.read_excel(*args, **kwargs)        
+        return pd.read_excel(path, sheetname='Sheet1', header=0, *args, **kwargs)        
 
     def Save(self, outputFile, columns=None):
         """
