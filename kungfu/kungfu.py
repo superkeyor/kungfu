@@ -559,6 +559,7 @@ class PatchedFrame(Frame):
 
     def Save(self, outputFile, columns=None):
         """
+        (self, outputFile, columns=None)
         Save the content of a frame to an excel or csv file.
         Args:
             the path to the excel file (xlsx), or csv(.csv, comma separated); explicitly specify .xlsx or .csv 
@@ -578,6 +579,7 @@ class PatchedFrame(Frame):
 
     def Print(self, column=None):
         """
+        Print(self, column=None)
         Print out common useful information of a frame.
         Args:
             optional column name or index; if passed, print out information of only that column instead of that of whole frame.
@@ -781,6 +783,7 @@ class PatchedFrame(Frame):
 
     def SelCol(self, column):
         """
+        (self, column)
         Select a single column from frame.
         Args:
             a int representing column index or a string representing column name
@@ -793,6 +796,7 @@ class PatchedFrame(Frame):
 
     def SelRow(self, row):
         """
+        (self, row)
         Select a single row from frame.
         Args:
             a int representing row index or a string representing row name
@@ -823,6 +827,7 @@ class PatchedFrame(Frame):
 
     def GroupV(self, edgeMatchSeries, groupColumnName='AutoGroup'):
         """
+        (self, edgeMatchSeries, groupColumnName='AutoGroup')
         Edge condition based grouping along the vertical direction.
         1) Create a new column and put the group category of each block into this column, such as "G0","G1","G2"
         2) Edge is marked as "Edge"
@@ -841,6 +846,7 @@ class PatchedFrame(Frame):
 
     def SplitH(self, subFrameSize=1, resetIndex=True):
         """
+        (self, subFrameSize=1, resetIndex=True)
         Split frame along the horizontal direction into pieces of equal size if possible.
         Args:
             subFrameSize means how many cols each subFrame would have
@@ -873,6 +879,7 @@ class PatchedFrame(Frame):
 
     def ReorderCols(self, columns=[]):
         """
+        (self, columns=[])
         Reorder columns of a frame.
         Args:
              a list that has equal size to the original columns
@@ -886,6 +893,7 @@ class PatchedFrame(Frame):
 
     def ReorderRows(self, indices=[]):
         """
+        (self, indices=[])
         Reorder the rows of a frame.
         Args:
             a list that has equal size to the original indices
@@ -899,6 +907,7 @@ class PatchedFrame(Frame):
 
     def RenameCols(self, newColumns=[]):
         """
+        (self, newColumns=[])
         Rename the names of each column of a frame.
         Args:
             a list that has equal size to the original columns
@@ -914,6 +923,7 @@ class PatchedFrame(Frame):
 
     def NewCol(self, newColumnName="NewColumn", newColumnValue=NA):
         """
+        (self, newColumnName="NewColumn", newColumnValue=NA)
         Append a new column to the frame.
         Args:
             new column name in string
@@ -930,7 +940,10 @@ class PatchedFrame(Frame):
         return self
 
     def FindVal(self, valToFind, *args):
-        """Print out all columns containing valToFind; only allows a single value to be passed each time"""
+        """
+        (self, valToFind, *args)
+        Print out all columns containing valToFind; only allows a single value to be passed each time
+        """
         assert len(args) == 0, "Only one value should be passed at a time."
         for colName, colSeries in self.iteritems():
             if valToFind in colSeries.unique():
@@ -940,7 +953,10 @@ class PatchedFrame(Frame):
                 print "+++++++++++++++++++++++++++++++++++++++++"
 
     def CountVal(self, valToCount, *args):
-        """Count all occurrence of the valToCount within the frame, can count np.nan, only allows a single value to be passed each time"""
+        """
+        (self, valToCount, *args)
+        Count all occurrence of the valToCount within the frame, can count np.nan, only allows a single value to be passed each time
+        """
         assert len(args) == 0, "Only one value should be passed at a time."
         # np.where reports error if valToCount is a string
         # return np.where(self == valToCount, 1, 0).sum()
@@ -1017,6 +1033,7 @@ class PatchedFrame(Frame):
         
     def Maskout(self, condition):
         """
+        (self, condition)
         1) if a frame cell's value matches the condition, then masked as NA; if not, preserve the original value
         2) returned as a copy; the original frame remains unchanged
         3) condition could be:
@@ -1176,6 +1193,7 @@ class PatchedSeries(Series):
 
     def Print(self):
         """
+        (self)
         Print out useful information of a series.
         Args:
             None
@@ -1209,6 +1227,7 @@ class PatchedSeries(Series):
 
     def Sel(self, elements=[]):
         """
+        (self, elements=[])
         Select elements from a series.
         Args:
             choose one of the three options:
@@ -1236,7 +1255,10 @@ class PatchedSeries(Series):
         return selected[0] if len(selected) == 1 else selected
 
     def CountVal(self, valToCount):
-        """count all occurrence, can count np.nan as well"""
+        """
+        (self, valToCount)
+        count all occurrence, can count np.nan as well
+        """
         if pd.isnull(valToCount):
             return self.isnull().sum()
         else:
@@ -1305,7 +1327,10 @@ class PatchedSeries(Series):
         return self.str
 
     def Maskout(self, condition):
-        """internally use the Frame.Maskout(); so condition is of the same type"""
+        """
+        (self, condition)
+        internally use the Frame.Maskout(); so condition is of the same type
+        """
         theSeries = self
         theSeriesFrame = Frame(theSeries)
         theSeriesFrameMasked = theSeriesFrame.Maskout(condition)
@@ -1321,6 +1346,7 @@ class PatchedSeries(Series):
 
 def MergeLR(left, right, join='union', onKeys=[], sort=True):
     """
+    (left, right, join='union', onKeys=[], sort=True)
     Merge 2 frames in the horizontal direction.
     Args:
         left frame, right frame
@@ -1375,6 +1401,7 @@ def MergeLR(left, right, join='union', onKeys=[], sort=True):
 
 def ConcatVH(frameList, axis=0, join="union", sort=False):
     """
+    (frameList, axis=0, join="union", sort=False)
     Concat in the vertical or horizontal direction.
     When concat in the vertical direction, i.e. along index, the horizontal (i.e. along columns) is defined as join direction.
     When concat in the horizontal columns direction, the join direction is the vertical index direction.
