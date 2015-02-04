@@ -617,7 +617,7 @@ class PatchedFrame(Frame):
             if type(column) in [str]:
                 columnName = column
                 columnIndex = frameColumns.index(columnName)
-            elif type(column) in [int]:
+            elif type(column) in [int,numpy.int32,numpy.int64]:
                 columnIndex = column
                 columnName = frameColumns[columnIndex]
             columnSeries = self.SelCol(column)
@@ -698,7 +698,7 @@ class PatchedFrame(Frame):
         def _PreProcessArgs(args):
             if len(args) == 1:
                 cols = args[0]
-                if type(cols) in [str,int]:
+                if type(cols) in [str,int,numpy.int32,numpy.int64]:
                     return ([cols],{})
                 elif type(cols) in [list]:
                     return (cols,{})
@@ -713,13 +713,13 @@ class PatchedFrame(Frame):
                 cols = args[0]
                 rows = args[1]
                 # cols
-                if type(cols) in [str,int]:
+                if type(cols) in [str,int,numpy.int32,numpy.int64]:
                     cols = [cols]
                 elif type(cols) in [list]:
                     cols = cols
 
                 # rows
-                if type(rows) in [str,int]:
+                if type(rows) in [str,int,numpy.int32,numpy.int64]:
                     rows = [rows]
                 elif type(rows) in [list]:
                     rows = rows
@@ -740,7 +740,7 @@ class PatchedFrame(Frame):
                 for col in cols:
                     if type(col) in [str]:
                         selectedCols.append(frm.loc[:,col])
-                    elif type(col) in [int]:
+                    elif type(col) in [int,numpy.int32,numpy.int64]:
                         selectedCols.append(frm.iloc[:,col])
                 selectedCols = pd.concat(selectedCols, join='outer', axis=1)
             else:
@@ -759,7 +759,7 @@ class PatchedFrame(Frame):
                     for row in rows:
                         if type(row) in [str]:
                             selectedRows.append(selectedCols.loc[[row],:])
-                        elif type(row) in [int]:
+                        elif type(row) in [int,numpy.int32,numpy.int64]:
                             selectedRows.append(selectedCols.iloc[[row],:])
                 else:
                     selectedRows = [selectedCols]
@@ -960,7 +960,7 @@ class PatchedFrame(Frame):
             result = []
         else:
             # when column does not have a name, it uses a numpy.int64 as its name. Then convert to python int.
-            if type(self.columns[0]) in [numpy.int64]:
+            if type(self.columns[0]) in [numpy.int32,numpy.int64]:
                 result = [int(column) for column in self.columns]
             else:
                 result = list(self.columns)
@@ -971,7 +971,7 @@ class PatchedFrame(Frame):
         if len(self.index) == 0:
             result = []
         else:
-            if type(self.index[0]) in [numpy.int64]:
+            if type(self.index[0]) in [numpy.int32,numpy.int64]:
                 result = [int(i) for i in self.index]
             else:
                 result = list(self.index)
@@ -1078,7 +1078,7 @@ class PatchedFrame(Frame):
             """
             # modification begins
             # convert a single str or int to a list
-            if type(values) in [str,int]: values = [values]
+            if type(values) in [str,int,numpy.int32,numpy.int64]: values = [values]
             # modification ends
             if isinstance(values, dict):
                 from collections import defaultdict
@@ -1115,7 +1115,7 @@ class PatchedFrame(Frame):
                                  frm.columns)
 
         # preprocess
-        if type(condition) in [int,str]:
+        if type(condition) in [int,numpy.int32,numpy.int64,str]:
             condition = [condition]
         # if a list (including list converted from the int and str above) or a dict
         # pass directly to the _FrameIsIn() which will return a frame of the same shape with values of True/False
@@ -1215,7 +1215,7 @@ class PatchedSeries(Series):
            None
         """
         # preprocess
-        if type(elements) in [str,int]:
+        if type(elements) in [str,int,numpy.int32,numpy.int64]:
             elements = [elements]
 
         # process
@@ -1223,7 +1223,7 @@ class PatchedSeries(Series):
         for i in elements:
             if type(i) in [str]:
                 selected.append(self.loc[i])
-            elif type(i) in [int]:
+            elif type(i) in [int,numpy.int32,numpy.int64]:
                 selected.append(self.iloc[i])
 
         # if only one selected, do not return a list
@@ -1253,7 +1253,7 @@ class PatchedSeries(Series):
         if len(self.index) == 0:
             result = []
         else:
-            if type(self.index[0]) in [numpy.int64]:
+            if type(self.index[0]) in [numpy.int32,numpy.int64]:
                 result = [int(i) for i in self.index]
             else:
                 result = list(self.index)
