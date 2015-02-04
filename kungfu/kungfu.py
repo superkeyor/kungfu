@@ -19,7 +19,7 @@ The above command will auto take care of the following requirements
 Requires pandas 0.12.0 (tested 0.12.0-2) which will also install python-dateutil(dateutil), numpy, pytz, six
 Requires openpyxl for writing excel (tested with 1.5.8, version 1.6.1 or higher, but lower than 2.0.0 may also work.)
 xlrd for reading excel, xlwt for writing .xls (old format) file
-(pip install pandas==0.12.0; pip install openpyxl==1.5.8; pip install xlrd)
+(pip install pandas==0.12.0; pip install openpyxl==1.5.8; pip install xlrd; pip install xlwt)
 
 
 Usage:
@@ -77,6 +77,8 @@ Series.maskout = Series.Maskout
 
 mergelr = MergeLR
 concatvh = ConcatVH
+Frame.tolist(), Frame.list()    <--homebrew method
+Series.tolist(), Series.list()   <--exisiting method in pandas
 
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # Frame IO, Frame info
@@ -1009,6 +1011,10 @@ class PatchedFrame(Frame):
         """
         return self.convert_objects(convert_dates=True, convert_numeric=True, copy=True)
 
+    def ToList(self):
+        """returns a list representation of a frame"""
+        return self.values.tolist()
+        
     def Maskout(self, condition):
         """
         1) if a frame cell's value matches the condition, then masked as NA; if not, preserve the original value
@@ -1476,6 +1482,8 @@ Frame.cnames = Frame.Columns
 Frame.names = Frame.Columns
 Frame.rnames = Frame.Indices
 Frame.num = Frame.ToNum
+Frame.tolist = Frame.ToList
+Frame.list = Frame.ToList
 Frame.maskout = Frame.Maskout
 # Frame.fillna = Frame.FillNA
 
@@ -1491,6 +1499,8 @@ Series.cames = Series.Indices
 Series.num = Series.ToNum
 Series.str = Series.ToStr
 Series.maskout = Series.Maskout
+Series.ToList = Series.tolist
+Series.list = Series.tolist
 # Series.fillna = Series.FillNA
 
 mergelr = MergeLR
