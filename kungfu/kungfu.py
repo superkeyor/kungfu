@@ -537,7 +537,7 @@ class PatchedFrame(Frame):
         Raises:
            None
         """
-        return pd.read_table(path, sep=',', header=0, *args, **kwargs)
+        return pd.read_table(path, sep=sep, header=header, *args, **kwargs)
     
     @classmethod
     def Readx(cls, path, sheetname='Sheet1', header=0, *args, **kwargs):
@@ -553,7 +553,7 @@ class PatchedFrame(Frame):
         Raises:
            None
         """
-        return pd.read_excel(path, sheetname='Sheet1', header=0, *args, **kwargs)        
+        return pd.read_excel(path, sheetname=sheetname, header=header, *args, **kwargs)        
 
     def Save(self, outputFile, columns=None):
         """
