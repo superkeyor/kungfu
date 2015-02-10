@@ -41,7 +41,7 @@ from pandas import isnull as isnull
 Frame.read = Frame.Read
 Frame.save = Frame.Save
 Frame.write = Frame.Save
-Frame.view = Frame.Print
+Frame.pprint = Frame.Print
 Frame.play = Frame.Play
 Frame.sel = Frame.Sel
 Frame.selcol = Frame.SelCol
@@ -63,7 +63,7 @@ Frame.maskout = Frame.Maskout
 # Frame.fillna = Frame.FillNA
 
 Series.play = Series.Play
-Series.view = Series.Print
+Series.pprint = Series.Print
 Series.sel = Series.Sel
 Series.countval = Series.CountVal
 # Series.unique = Series.Uniques  --existing method
@@ -1493,7 +1493,7 @@ Frame.read = Frame.Read
 Frame.readx = Frame.Readx
 Frame.save = Frame.Save
 Frame.write = Frame.Save
-Frame.view = Frame.Print
+Frame.pprint = Frame.Print
 Frame.play = Frame.Play
 Frame.sel = Frame.Sel
 Frame.selcol = Frame.SelCol
@@ -1517,7 +1517,7 @@ Frame.maskout = Frame.Maskout
 # Frame.fillna = Frame.FillNA
 
 Series.play = Series.Play
-Series.view = Series.Print
+Series.pprint = Series.Print
 Series.sel = Series.Sel
 Series.countval = Series.CountVal
 # Series.unique = Series.Uniques  --existing method
