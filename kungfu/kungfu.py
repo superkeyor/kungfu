@@ -602,6 +602,7 @@ class PatchedFrame(Frame):
         frameDtypes = list(self.dtypes)
 
         if column == None:
+            print '*********************************************************'
             print "This frame has %d columns (%s to %s), %d rows (%s to %s, may not consecutive)" % (len(frameColumns), frameColumns[0], frameColumns[-1], len(frameIndices), frameIndices[0], frameIndices[-1])
 
             print ""
@@ -615,11 +616,7 @@ class PatchedFrame(Frame):
 
             print ""
             print "Again, this frame has %d columns (%s to %s), %d rows (%s to %s, may not consecutive)" % (len(frameColumns), frameColumns[0], frameColumns[-1], len(frameIndices), frameIndices[0], frameIndices[-1])
-
-            print ''
-            print "-----------------------------------------------------------------------"
-            print ''
-            
+            print "---------------------------------"
             print "Head 5:"
             print self.head()
             print "."
@@ -627,6 +624,7 @@ class PatchedFrame(Frame):
             print "."
             print "Tail 5:"
             print self.tail()
+            print '*********************************************************'
 
         # print only the column
         else:
@@ -638,19 +636,18 @@ class PatchedFrame(Frame):
                 columnName = frameColumns[columnIndex]
             columnSeries = self.SelCol(column)
             columnUniques = columnSeries.Uniques()
-
+            print '*********************************************************'
             print "Column Information:"
             print "Index %28s Name %2s Datatype %-1s #Unique %-1s #Missing %-1s #Total" % ("", "", "", "", "")
             print "%3d %35s %10s %4d %10d %13d" % (columnIndex, columnName, frameDtypes[columnIndex], len(columnUniques), columnSeries.CountVal(NA), len(frameIndices))
 
             if len(columnUniques) <= 50:
-                print ''
-                print "-----------------------------------------------------------------------"
-                print ''
+                print "---------------------------------"
                 print "Unique values are:"
                 print "Index %23s Value %4s Count" % ("", "")
                 for index, uniqueValue in enumerate(columnUniques):
                     print "%3d %31s %10d" % (index, uniqueValue, columnSeries.CountVal(uniqueValue))
+            print '*********************************************************'
 
     @classmethod
     def Play(cls):
@@ -1224,6 +1221,7 @@ class PatchedSeries(Series):
         serIndices = ser.Indices()
         serTotalNum = len(serIndices)
 
+        print '*********************************************************'
         print "This series has %d values (%s to %s, may not consecutive)" % (serTotalNum, serIndices[0], serIndices[-1])
 
         print ""
@@ -1233,13 +1231,12 @@ class PatchedSeries(Series):
         print ser
 
         if len(serUniques) <= 50:
-            print ''
-            print "-----------------------------------------------------------------------"
-            print ''
+            print "---------------------------------"
             print "Unique values are:"
             print "Index %23s Value %4s Count" % ("", "")
             for index, uniqVal in enumerate(serUniques):
                 print "%3d %31s %10d" %(index, uniqVal, ser.CountVal(uniqVal))
+        print '*********************************************************'
 
     def Sel(self, elements=[]):
         """
