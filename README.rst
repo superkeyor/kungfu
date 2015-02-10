@@ -39,6 +39,7 @@ Frame.write = Frame.Save
 Frame.pprint = Frame.Print
 Frame.play = Frame.Play
 Frame.sel = Frame.Sel
+Frame.selcol = Frame.SelCol
 Frame.selrow = Frame.SelRow
 Frame.delete = Frame.Del
 Frame.groupv = Frame.GroupV
