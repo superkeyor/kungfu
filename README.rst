@@ -37,6 +37,7 @@ Frame.read = Frame.Read
 Frame.save = Frame.Save
 Frame.write = Frame.Save
 Frame.pprint = Frame.Print
+Frame.info = Frame.Print
 Frame.play = Frame.Play
 Frame.sel = Frame.Sel
 Frame.selcol = Frame.SelCol
@@ -59,6 +60,7 @@ Frame.maskout = Frame.Maskout
 
 Series.play = Series.Play
 Series.pprint = Series.Print
+Series.info = Series.Print
 Series.sel = Series.Sel
 Series.countval = Series.CountVal
 # Series.unique = Series.Uniques  --existing method
