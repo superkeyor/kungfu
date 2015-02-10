@@ -24,6 +24,7 @@ xlrd for reading excel, xlwt for writing .xls (old format) file
 
 Usage:
 Want pandas functions index?
+http://pandas.pydata.org/pandas-docs/version/0.12.0/genindex.html
 http://pandas.pydata.org/pandas-docs/version/0.12.0/
 
 Call methods
@@ -479,6 +480,11 @@ for columnName, columnSeries in Frame.iteritems():
     columnUniques = columnSeries.Uniques()
 for rowIndex, rowSeries in Frame.iterrows():
 for index, value in Series.iteritems():
+
+Also consider apply, applymap, map
+apply works on a row / column basis of a DataFrame, 
+applymap works element-wise on a DataFrame, 
+and map works element-wise on a Series.    
 """
 
 
@@ -558,7 +564,7 @@ class PatchedFrame(Frame):
         Raises:
            None
         """
-        return pd.read_excel(path, sheetname=sheetname, header=header, *args, **kwargs)        
+        return pd.read_excel(path, sheetname=sheetname, header=header, *args, **kwargs)
 
     def Save(self, outputFile, columns=None):
         """
