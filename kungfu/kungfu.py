@@ -30,7 +30,7 @@ Memorization: list=series=column
 
 from pandas import isnull as isna
 from pandas import isnull as isnull
-Frame.read = Frame.Read                     Frame.save = Frame.Save                     Frame.write = Frame.Save
+Frame.read(x) = Frame.Read(x)               Frame.save = Frame.Save                     Frame.write = Frame.Save
 Frame.peek = Frame.Print                    Frame.Peek = Frame.Print                    Frame.play = Frame.Play
 Frame.sel = Frame.Sel                       Frame.selcol = Frame.SelCol                 Frame.selrow = Frame.SelRow
 Frame.delete = Frame.Del                    Frame.groupv = Frame.GroupV                 Frame.splith = Frame.SplitH
@@ -45,52 +45,16 @@ Series.len = Series.Size                    Series.names = Series.Indices       
 Series.cames = Series.Indices               Series.num = Series.ToNum                   Series.str = Series.ToStr
 Series.maskout = Series.Maskout             # Series.fillna = Series.FillNA
 
+frame.mean(axis=0),frame.median(axis=0),frame.sum(axis=0)
+series.mean(axis=0),series.median(axis=0),series.sum(axis=0)
+series.corr(other, method='')
+
 mergelr = MergeLR                           concatvh = ConcatVH
 Frame.tolist(), Frame.list()<--homebrew     Series.tolist(), Series.list()   <--exisiting method in pandas
-
-# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-# Frame IO, Frame info
-# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-frame = Frame.Read(path, sep=",", header=0) frame = Frame.Readx(path, sheetname='Sheet1', header=0)
-frame.Print([column=None])                  series.Print()
-frame.Save(outputFile[, columns=None])      
-f = Frame.Play()                            s = Series.Play()
-
-# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-# Selection, grouping
-# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-frame.Sel(*args)                            frame.SelCol(column)
-frame.SelRow(row)                           frame.Del(*args):
-frame.GroupV(edgeMatchSeries, groupColumnName='AutoGroup')
-frame.SplitH(subFrameSize=1, resetIndex=True)
-series.Sel(elements=[])
-
-# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-# Reorganize
-# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 General notes on "join":
     when joining along an axis, the index of each frame does not have to in the same order
     e.g. ["a","b","c","f"] for left frame, ["b","c","a","e"] for right frame
     join will match them and return the combined frame (in a certain order)
-MergeLR(left, right, join='union', onKeys=[], sort=True)
-ConcatVH(frameList, axis=0, join="union", sort=False)
-frame.ReorderCols(columns=[])               frame.ReorderRows(indices=[])
-frame.RenameCols(newColumns=[])             frame.NewCol([newColumnName="NewColumn"[, newColumnValue=NA]])
-
-# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-# Stats, Processing
-# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-IsNA(object)                                frame.FindVal(valToFind)
-frame.CountVal(valToCount)                  frame.Columns()
-frame.Indices()                             frame.ToNum()
-frame.Maskout(condition)                    frame.FillNA( *args, **kwargs)
-frame.mean(axis=0),frame.median(axis=0),frame.sum(axis=0)
-frame.corr(method='')                       series.CountVal(valToCount)
-series.Uniques()                            series.Size()
-series.Indices()                            series.ToNum()
-series.Maskout(condition)                   series.FillNA( *args, **kwargs)
-series.mean(axis=0),series.median(axis=0),series.sum(axis=0)
-series.corr(other, method='')               series = series.ToStr()
 
 Loop how to:
 for columnName, columnSeries in Frame.iteritems():
