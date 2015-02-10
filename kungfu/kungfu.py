@@ -400,6 +400,7 @@ class PatchedFrame(Frame):
 
     def Del(self, *args):
         """
+        (self, *args)
         Delete columns and/or rows from frame.
         Args:
             Same as those for Sel
