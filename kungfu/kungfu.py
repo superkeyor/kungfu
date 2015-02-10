@@ -616,7 +616,7 @@ class PatchedFrame(Frame):
             print ""
             print "Again, this frame has %d columns (%s to %s), %d rows (%s to %s, may not consecutive)" % (len(frameColumns), frameColumns[0], frameColumns[-1], len(frameIndices), frameIndices[0], frameIndices[-1])
 
-            print ""
+            print "-----------------------------------------------------------"
             print "Head 5:"
             print self.head()
             print "."
