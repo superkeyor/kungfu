@@ -23,8 +23,6 @@ Visualize a single list as a series and therefore a column of a frame when conve
 However, for a list of lists, Visualize each list of the list (i.e. sublist) as a row!
 Memorization: list=series=column
 
-from pandas import isnull as isna
-from pandas import isnull as isnull
 Frame.read(x) = Frame.Read(x)               Frame.save = Frame.Save                     Frame.write = Frame.Save
 Frame.peek = Frame.Print                    Frame.Peek = Frame.Print                    Frame.play = Frame.Play
 Frame.sel = Frame.Sel                       Frame.selcol = Frame.SelCol                 Frame.selrow = Frame.SelRow
@@ -40,6 +38,8 @@ Series.len = Series.Size                    Series.names = Series.Indices       
 Series.cames = Series.Indices               Series.num = Series.ToNum                   Series.str = Series.ToStr
 Series.maskout = Series.Maskout             # Series.fillna = Series.FillNA
 
+from pandas import isnull as isna
+from pandas import isnull as isnull
 frame.mean(axis=0),frame.median(axis=0),frame.sum(axis=0)
 series.mean(axis=0),series.median(axis=0),series.sum(axis=0)
 series.corr(other, method='')
