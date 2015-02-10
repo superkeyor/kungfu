@@ -36,8 +36,7 @@ from pandas import isnull as isnull
 Frame.read = Frame.Read
 Frame.save = Frame.Save
 Frame.write = Frame.Save
-Frame.pprint = Frame.Print
-Frame.info = Frame.Print
+Frame.view = Frame.Print
 Frame.play = Frame.Play
 Frame.sel = Frame.Sel
 Frame.selcol = Frame.SelCol
@@ -59,8 +58,7 @@ Frame.maskout = Frame.Maskout
 # Frame.fillna = Frame.FillNA
 
 Series.play = Series.Play
-Series.pprint = Series.Print
-Series.info = Series.Print
+Series.view = Series.Print
 Series.sel = Series.Sel
 Series.countval = Series.CountVal
 # Series.unique = Series.Uniques  --existing method
