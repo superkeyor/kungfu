@@ -616,7 +616,10 @@ class PatchedFrame(Frame):
             print ""
             print "Again, this frame has %d columns (%s to %s), %d rows (%s to %s, may not consecutive)" % (len(frameColumns), frameColumns[0], frameColumns[-1], len(frameIndices), frameIndices[0], frameIndices[-1])
 
-            print "-----------------------------------------------------------"
+            print ''
+            print "-----------------------------------------------------------------------"
+            print ''
+            
             print "Head 5:"
             print self.head()
             print "."
@@ -641,7 +644,9 @@ class PatchedFrame(Frame):
             print "%3d %35s %10s %4d %10d %13d" % (columnIndex, columnName, frameDtypes[columnIndex], len(columnUniques), columnSeries.CountVal(NA), len(frameIndices))
 
             if len(columnUniques) <= 50:
-                print ""
+                print ''
+                print "-----------------------------------------------------------------------"
+                print ''
                 print "Unique values are:"
                 print "Index %23s Value %4s Count" % ("", "")
                 for index, uniqueValue in enumerate(columnUniques):
@@ -1228,7 +1233,9 @@ class PatchedSeries(Series):
         print ser
 
         if len(serUniques) <= 50:
-            print ""
+            print ''
+            print "-----------------------------------------------------------------------"
+            print ''
             print "Unique values are:"
             print "Index %23s Value %4s Count" % ("", "")
             for index, uniqVal in enumerate(serUniques):
