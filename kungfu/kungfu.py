@@ -186,7 +186,7 @@ class PatchedFrame(Frame):
             print "This frame has %d columns (%s to %s), %d rows (%s to %s, may not consecutive)" % (len(frameColumns), frameColumns[0], frameColumns[-1], len(frameIndices), frameIndices[0], frameIndices[-1])
 
             print ""
-            print "Column Information:"
+            print "Column Information: (an integer in float64 can still be treated as int, 205.0==205 True)"
             print "Index %28s Name %2s Datatype %-1s #Unique %-1s #Missing %-1s #Total" % ("", "", "", "", "")
             columnIndex = 0
             for columnName, columnSeries in self.iteritems():
@@ -217,7 +217,7 @@ class PatchedFrame(Frame):
             columnSeries = self.SelCol(column)
             columnUniques = columnSeries.Uniques()
             print '*********************************************************'
-            print "Column Information:"
+            print "Column Information: (an integer in float64 can still be treated as int, 205.0==205 True)"
             print "Index %28s Name %2s Datatype %-1s #Unique %-1s #Missing %-1s #Total" % ("", "", "", "", "")
             print "%3d %35s %10s %4d %10d %13d" % (columnIndex, columnName, frameDtypes[columnIndex], len(columnUniques), columnSeries.CountVal(NA), len(frameIndices))
 
@@ -806,6 +806,7 @@ class PatchedSeries(Series):
         print "This series has %d values (%s to %s, may not consecutive)" % (serTotalNum, serIndices[0], serIndices[-1])
 
         print ""
+        print 'an integer in float64 can still be treated as int, 205.0==205 True'
         print "Name: %s, Datatype: %s, #Unique: %d, #Missing: %d, #Total %d" % (serName, serDatatype, len(serUniques), serMissingNum, serTotalNum)
 
         print ""
