@@ -187,11 +187,11 @@ class PatchedFrame(Frame):
 
             print ""
             print "Column Information: (an integer in float64 can still be treated as int, 205.0==205 True)"
-            print "Index %28s Name %2s Datatype %-1s #Unique %-1s #Missing %-1s #Total" % ("", "", "", "", "")
+            print "Index %28s Name %2s Datatype %-1s #Unique %-1s #Missing %-1s #Non-missing %-1s #Total" % ("", "", "", "", "", "")
             columnIndex = 0
             for columnName, columnSeries in self.iteritems():
                 columnUniques = columnSeries.Uniques()
-                print "%3d %35s %10s %4d %10d %13d" % (columnIndex, columnName, frameDtypes[columnIndex], len(columnUniques), pd.isnull(columnSeries).sum(), len(frameIndices))
+                print "%3d %35s %10s %4d %10d %12d %13d" % (columnIndex, columnName, frameDtypes[columnIndex], len(columnUniques), pd.isnull(columnSeries).sum(), len(frameIndices)-pd.isnull(columnSeries).sum(), len(frameIndices))
                 columnIndex = columnIndex + 1
 
             print ""
@@ -218,8 +218,8 @@ class PatchedFrame(Frame):
             columnUniques = columnSeries.Uniques()
             print '*********************************************************'
             print "Column Information: (an integer in float64 can still be treated as int, 205.0==205 True)"
-            print "Index %28s Name %2s Datatype %-1s #Unique %-1s #Missing %-1s #Total" % ("", "", "", "", "")
-            print "%3d %35s %10s %4d %10d %13d" % (columnIndex, columnName, frameDtypes[columnIndex], len(columnUniques), columnSeries.CountVal(NA), len(frameIndices))
+            print "Index %28s Name %2s Datatype %-1s #Unique %-1s #Missing %-1s #Non-missing %-1s #Total" % ("", "", "", "", "", "")
+            print "%3d %35s %10s %4d %10d %12d %13d" % (columnIndex, columnName, frameDtypes[columnIndex], len(columnUniques), columnSeries.CountVal(NA), len(frameIndices)-columnSeries.CountVal(NA), len(frameIndices))
 
             if len(columnUniques) <= 50:
                 print "---------------------------------"
@@ -807,7 +807,7 @@ class PatchedSeries(Series):
 
         print ""
         print 'an integer in float64 can still be treated as int, 205.0==205 True'
-        print "Name: %s, Datatype: %s, #Unique: %d, #Missing: %d, #Total %d" % (serName, serDatatype, len(serUniques), serMissingNum, serTotalNum)
+        print "Name: %s, Datatype: %s, #Unique: %d, #Missing: %d, #Non-Missing: %d, #Total %d" % (serName, serDatatype, len(serUniques), serMissingNum, serTotalNum-serMissingNum, serTotalNum)
 
         print ""
         print ser
