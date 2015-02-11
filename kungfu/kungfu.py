@@ -115,9 +115,9 @@ class PatchedFrame(Frame):
     __metaclass__ = monkeypatch_class
 
     @classmethod
-    def Read(cls, path, sep=',', header=0, *args, **kwargs):
+    def Read(cls, path, sep='\t', header=0, *args, **kwargs):
         """
-        (path, sep=',', header=0, *args, **kwargs)
+        (path, sep='\t', header=0, *args, **kwargs)
         Read data into a frame. This is a class method.
         Args:
             path, a text or csv file
