@@ -26,7 +26,7 @@ Memorization: list=series=column
 Frame.read(x) = Frame.Read(x)               Frame.save = Frame.Save                     Frame.write = Frame.Save
 Frame.peek = Frame.Print                    Frame.Peek = Frame.Print                    Frame.play = Frame.Play
 Frame.sel = Frame.Sel                       Frame.selcol = Frame.SelCol                 Frame.selrow = Frame.SelRow
-Frame.delete = Frame.Del                    Frame.groupv = Frame.GroupV                 Frame.splith = Frame.SplitH
+Frame.delete/remove = Frame.Del             Frame.groupv = Frame.GroupV                 Frame.splith = Frame.SplitH
 Frame.recols = Frame.ReorderCols            Frame.rerows = Frame.ReorderRows            Frame.rncols = Frame.RenameCols
 Frame.newcol = Frame.NewCol                 Frame.findval = Frame.FindVal               Frame.countval = Frame.CountVal
 Frame.cnames = Frame.Columns                Frame.names = Frame.Columns                 Frame.rnames = Frame.Indices

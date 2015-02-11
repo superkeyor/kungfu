@@ -31,7 +31,7 @@ Memorization: list=series=column
 Frame.read(x) = Frame.Read(x)               Frame.save = Frame.Save                     Frame.write = Frame.Save
 Frame.peek = Frame.Print                    Frame.Peek = Frame.Print                    Frame.play = Frame.Play
 Frame.sel = Frame.Sel                       Frame.selcol = Frame.SelCol                 Frame.selrow = Frame.SelRow
-Frame.delete = Frame.Del                    Frame.groupv = Frame.GroupV                 Frame.splith = Frame.SplitH
+Frame.delete/remove = Frame.Del             Frame.groupv = Frame.GroupV                 Frame.splith = Frame.SplitH
 Frame.recols = Frame.ReorderCols            Frame.rerows = Frame.ReorderRows            Frame.rncols = Frame.RenameCols
 Frame.newcol = Frame.NewCol                 Frame.findval = Frame.FindVal               Frame.countval = Frame.CountVal
 Frame.cnames = Frame.Columns                Frame.names = Frame.Columns                 Frame.rnames = Frame.Indices
@@ -131,20 +131,29 @@ class PatchedFrame(Frame):
         return pd.read_table(path, sep=sep, header=header, *args, **kwargs)
     
     @classmethod
-    def Readx(cls, path, sheetname='Sheet1', header=0, *args, **kwargs):
+    def Readx(cls, path, sheet=0, header=0, *args, **kwargs):
         """
-        (path, sheetname='Sheet1', header=0, *args, **kwargs)
+        (path, sheet=1, header=0, *args, **kwargs)
         Read xlsx, xls file into a frame
         Args:
             path, a xlsx, xls file file
-            sep, character used to separate the file
+            sheet, either sheet number (the first is 0) or sheet name (e.g., Sheet1)
             header, the row number with header (0=first row, None=no header at all)
         Returns:
             a Frame object with the data
         Raises:
            None
         """
-        return pd.read_excel(path, sheetname=sheetname, header=header, *args, **kwargs)
+        #hack pd.read_excel in pandas 0.12.0 which only supports sheet name not number
+        if type(sheet) in [int,numpy.int32,numpy.int64]:
+            import xlrd
+            workbook = xlrd.open_workbook(path)
+            sheetNames = workbook.sheet_names()
+            sheetName = sheetNames[sheet]
+        else:
+            sheetName = sheet
+        #hack end
+        return pd.read_excel(path, sheetname=sheetName, header=header, *args, **kwargs)
 
     def Save(self, outputFile, columns=None):
         """
@@ -1123,6 +1132,7 @@ Frame.sel = Frame.Sel
 Frame.selcol = Frame.SelCol
 Frame.selrow = Frame.SelRow
 Frame.delete = Frame.Del
+Frame.remove = Frame.Del
 Frame.groupv = Frame.GroupV
 Frame.splith = Frame.SplitH
 Frame.recols = Frame.ReorderCols
