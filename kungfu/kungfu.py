@@ -403,10 +403,39 @@ class PatchedFrame(Frame):
         (self, *args)
         Delete columns and/or rows from frame.
         Args:
-            Same as those for Sel
+            if going to delete several columns/rows using index numbers
+                remove columns/rows at the same time, after that the index would reorder
             if a to-be-deleted column or row does not exist in the frame, it will be ignored
+            Same as those for Sel
+
+            1) [] for columns FIRST, {} or [] for rows SECOND
+            2) if only pass [], treated as columns; if only {}, as rows
+            3) additionally, a single int(or str) can be parsed to a list of that int(or str)
+            4) int alone or in a list treated as (column/row) index; str alone or in a list as (column/row) name
+            5) does NOT support slice; however, one can use the function range(start,stop) to generate a list
+            6) better see some examples:
+                ('Session') column "Session"
+                (1) column 1 (index based, starts from 0)
+                (['Session', 1])
+                    columns "Session" and 1
+                    the order of selected columns does not have to follow the order in the original frame! could be [2,4,0,1]
+                ({'Session': 1}) all columns where "Session" == 1
+                ('Session', '0') <---raise error because of '0'
+                ('Session', 0) column "Session" and row 0 (index based, starts from 0)
+                ('Session', [0, 1]) column "Session" and rows 0 and 1
+                ('Session', {'Session': 1}) column "Session" where "Session" == 1
+                (0, '0') <---raise error because of '0'
+                (0, 0) column 0 and row 0
+                (0, [0, 1]) column 0 and rows 0 and 1
+                (0, {'Session': 1}) column 0 where "Session" == 1
+                (['Session', 1], '0') <---raise error because of '0'
+                (['Session', 1], 0) columns "Session" and 1, and row 0
+                (['Session', 1], [0, 1]) columns "Session" and 1, and, rows 0 and 1
+                (['Session', 1], {"Subject":5101,"Procedure[Trial]":["PresentPair","PresentPair1"]})
+                    columns "Session" and 1 where "Subject" == 5101 and ("Procedure[Trial]" == "PresentPair" or "Procedure[Trial]" == "PresentPair1")
+                ([],0) all columns and row 0
         Returns:
-            a Frame object without the passed columns and rows
+            a Frame object without the passed columns and rows (the original frame itself does not change)
             when passing an empty columns/rows, this method deletes nothing and returns a Frame object of the same shape
         Raises:
            None
