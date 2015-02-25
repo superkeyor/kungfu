@@ -115,19 +115,23 @@ class PatchedFrame(Frame):
     __metaclass__ = monkeypatch_class
 
     @classmethod
-    def Read(cls, path, sep='\t', header=0, *args, **kwargs):
+    def Read(cls, path, sep='\t or ,', header=0, *args, **kwargs):
         """
-        (path, sep='\t', header=0, *args, **kwargs)
+        (path, sep='\t' or ',', header=0, *args, **kwargs)
         Read data into a frame. This is a class method.
         Args:
             path, a text or csv file
-            sep, character used to separate the file
+            sep, character used to separate the file (if path is txt, sep defaults to '\t'; else (e.g., csv) sep ',')
             header, the row number with header (0=first row, None=no header at all)
         Returns:
             a Frame object with the data
         Raises:
            None
         """
+        if path.endswith('.txt'): 
+            sep = '\t'
+        else:
+            sep = ','
         return pd.read_table(path, sep=sep, header=header, *args, **kwargs)
     
     @classmethod
