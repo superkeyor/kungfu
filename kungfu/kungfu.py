@@ -56,6 +56,22 @@ General notes on "join":
     e.g. ["a","b","c","f"] for left frame, ["b","c","a","e"] for right frame
     join will match them and return the combined frame (in a certain order)
 
+e.g., 
+outputFrame = kf.MergeLR(outputFrame, tempFrame, join="inter", onKeys=[["sbj", "wordpair"]], sort=False)
+
+tempFrame = kf.ConcatVH([tempFrame, immediate, delayed]) 
+tempRow = [sbj, cnd, memoryTesting, memoryImmediate, memoryDelay, memoryImmediateDelay]
+tempFrame.append(tempRow)
+tempFrame.extend(immediate + delayed)
+
+for sbj, grp in edatFrame.groupby("Subject"):  
+grp is a Frame
+groupby([key1, key2])
+groupby().groups  is a dict whose keys are the computed unique groups 
+                  and corresponding values being the axis labels belonging to each group
+                  {'bar': [1, 3, 5], 'foo': [0, 2, 4, 6, 7]}
+
+
 Loop how to:
 for columnName, columnSeries in Frame.iteritems():
     columnIndex = Frame.Columns().index(colName)
