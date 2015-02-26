@@ -1001,7 +1001,7 @@ def MergeLR(left, right, join='union', onKeys=[], sort=True, suffixes=('_1', '_2
     """
     (left, right, join='union', onKeys=[], sort=True)
     Merge 2 frames in the horizontal direction.
-    e.g., outputFrame = kf.MergeLR(outputFrame, tempFrame, join=”inter”, onKeys=[[“sbj”, “wordpair”]], sort=False)
+    e.g., outputFrame = kf.MergeLR(outputFrame, tempFrame, join="inter", onKeys=[["sbj", "wordpair"]], sort=False)
     Args:
         left frame, right frame
         join: "left", "right", "union", "outer", "inter", "inner"
