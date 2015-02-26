@@ -180,8 +180,9 @@ class PatchedFrame(Frame):
         (self, outputFile, columns=None)
         Save the content of a frame to an excel or csv file.
         Args:
-            the path to the excel file (xlsx), or csv(.csv, comma separated); explicitly specify .xlsx or .csv 
+            the path to the excel file (xlsx/xls), or csv(.csv, comma separated); explicitly specify .xlsx/xls or .csv 
             optional columns, the order and names of columns to save
+            xls (but not xlsx) may be more compatible with old-version software (spss v20)
                 1) can reorder or omit some of the frame's original columns
                 2) if skipped, use the frame's original order and names
                 3) example: columns=["sbj","Wordpair","UResp","recalled","stage"]
