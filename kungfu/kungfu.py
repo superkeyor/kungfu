@@ -175,9 +175,9 @@ class PatchedFrame(Frame):
         #hack end
         return pd.read_excel(path, sheetname=sheetName, header=header, *args, **kwargs)
 
-    def Save(self, outputFile, columns=None):
+    def Save(self, outputFile, columns=None, float_format="%.3f"):
         """
-        (self, outputFile, columns=None)
+        (self, outputFile, columns=None, float_format="%.3f")
         Save the content of a frame to an excel or csv file.
         Args:
             the path to the excel file (xlsx/xls), or csv(.csv, comma separated); explicitly specify .xlsx/xls or .csv 
@@ -192,9 +192,9 @@ class PatchedFrame(Frame):
            None
        """
         if outputFile.endswith('.csv'):
-            self.to_csv(outputFile, sep=',', na_rep='', float_format="%.3f", cols=columns, header=True, index=False, index_label=None, mode='w', encoding='utf-8')
+            self.to_csv(outputFile, sep=',', na_rep='', float_format=float_format, cols=columns, header=True, index=False, index_label=None, mode='w', encoding='utf-8')
         else:
-            self.to_excel(outputFile, sheet_name='Sheet1', na_rep='', float_format="%.3f", cols=columns, header=True, index=False, index_label=None, startrow=0, startcol=0)
+            self.to_excel(outputFile, sheet_name='Sheet1', na_rep='', float_format=float_format, cols=columns, header=True, index=False, index_label=None, startrow=0, startcol=0)
 
     def Print(self, column=None):
         """
@@ -1000,7 +1000,7 @@ class PatchedSeries(Series):
 
 def MergeLR(left, right, join='union', onKeys=[], sort=True, suffixes=('_1', '_2')):
     """
-    (left, right, join='union', onKeys=[], sort=True)
+    (left, right, join='union', onKeys=[], sort=True, suffixes=('_1', '_2'))
     Merge 2 frames in the horizontal direction.
     e.g., outputFrame = kf.MergeLR(outputFrame, tempFrame, join="inter", onKeys=[["sbj", "wordpair"]], sort=False)
     Args:
