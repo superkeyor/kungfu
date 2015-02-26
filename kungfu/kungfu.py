@@ -678,7 +678,7 @@ class PatchedFrame(Frame):
         return self.convert_objects(convert_dates=True, convert_numeric=True, copy=True)
 
     def ToList(self):
-        """returns a list representation of a frame"""
+        """returns a list representation of a frame; the result is a list of list in fact"""
         return self.values.tolist()
         
     def Maskout(self, condition):
