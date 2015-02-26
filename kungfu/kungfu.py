@@ -997,13 +997,14 @@ class PatchedSeries(Series):
 
 
 
-def MergeLR(left, right, join='union', onKeys=[], sort=True):
+def MergeLR(left, right, join='union', onKeys=[], sort=True, suffixes=('_1', '_2')):
     """
     (left, right, join='union', onKeys=[], sort=True)
     Merge 2 frames in the horizontal direction.
+    e.g., outputFrame = kf.MergeLR(outputFrame, tempFrame, join=”inter”, onKeys=[[“sbj”, “wordpair”]], sort=False)
     Args:
         left frame, right frame
-        join: "left", "right", "union","outer","inter", "inner"
+        join: "left", "right", "union", "outer", "inter", "inner"
             when a frame column has duplicated values, it will be confusing (i.e. Cartesian product?)
         onKeys:
             1) a list of 2 elements, the first for the left frame, the second for the right
@@ -1013,6 +1014,7 @@ def MergeLR(left, right, join='union', onKeys=[], sort=True):
             5) could be the same or different, e.g. ["subject","subject"], or ["name","word"]
             6) a special element name "@INDEX" uses the index of the frame, e.g. ["subject","@INDEX"] or ["@INDEX","@INDEX"]
         sort: whether to sort the final merged frame based on the join-key
+        suffixes=('_1', '_2') default, another example suffixes=('_x', '_y')
     Returns:
         a merged frame
         when merge on a column key rather than an index, in the merged frame, the index will be reset from 0 to n
@@ -1049,7 +1051,7 @@ def MergeLR(left, right, join='union', onKeys=[], sort=True):
             right_index = True
         else:
             right_on = rightKey
-    return pd.merge(left, right, how=join, on=on, left_on=left_on, right_on=right_on, left_index=left_index, right_index=right_index, sort=sort, suffixes=('_x', '_y'), copy=True)
+    return pd.merge(left, right, how=join, on=on, left_on=left_on, right_on=right_on, left_index=left_index, right_index=right_index, sort=sort, suffixes=suffixes, copy=True)
 
 
 def ConcatVH(frameList, axis=0, join="union", sort=False):
