@@ -192,8 +192,9 @@ class PatchedFrame(Frame):
         Args:
             the path to the excel file (xlsx/xls), or csv(.csv, comma separated); explicitly specify .xlsx/xls or .csv 
                 xls (but not xlsx) may be more compatible with old-version software (spss v20)
-                however, xls limited to 256 columns and 65536 rows
+                however, xls limited to 256 columns by 65536 rows
                 in which case, consider csv as an alternative
+                or xlsx which has limits of 16,384 columns by 1,048,576 rows
                 csv writing is much faster than xlsx
             optional columns, the order and names of columns to save
                 1) can reorder or omit some of the frame's original columns
