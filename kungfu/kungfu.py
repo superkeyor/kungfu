@@ -185,21 +185,21 @@ class PatchedFrame(Frame):
         #hack end
         return pd.read_excel(path, sheetname=sheetName, header=header, *args, **kwargs)
 
-    def Save(self, outputFile, columns=None, float_format="%.3f"):
+    def Save(self, outputFile, columns=None, float_format="%.6f"):
         """
-        (self, outputFile, columns=None, float_format="%.3f")
+        (self, outputFile, columns=None, float_format="%.6f")
         Save the content of a frame to an excel or csv file.
         Args:
             the path to the excel file (xlsx/xls), or csv(.csv, comma separated); explicitly specify .xlsx/xls or .csv 
+                xls (but not xlsx) may be more compatible with old-version software (spss v20)
             optional columns, the order and names of columns to save
-            xls (but not xlsx) may be more compatible with old-version software (spss v20)
                 1) can reorder or omit some of the frame's original columns
                 2) if skipped, use the frame's original order and names
                 3) example: columns=["sbj","Wordpair","UResp","recalled","stage"]
         Returns:
             None
         Raises:
-           None
+            None
        """
         if outputFile.endswith('.csv'):
             self.to_csv(outputFile, sep=',', na_rep='', float_format=float_format, cols=columns, header=True, index=False, index_label=None, mode='w', encoding='utf-8')
