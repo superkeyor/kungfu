@@ -107,6 +107,8 @@ import os, sys, platform, string, random
 import numpy
 import numpy as np
 from numpy import nan as NA
+from numpy import nan as na
+from numpy import nan as nan
 import pandas
 import pandas as pd
 from pandas import DataFrame
