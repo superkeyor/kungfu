@@ -28,7 +28,7 @@ Visualize a single list as a series and therefore a column of a frame when conve
 However, for a list of lists, Visualize each list of the list (i.e. sublist) as a row!
 Memorization: list=series=column
 
-Frame.read(x) = Frame.Read(x)               Frame.save = Frame.Save                     Frame.write = Frame.Save
+Frame.read/x = Frame.Read/x               Frame.save/x = Frame.Save/x               Frame.write/x = Frame.Save/x
 Frame.peek = Frame.Print                    Frame.Peek = Frame.Print                    Frame.play = Frame.Play
 Frame.sel = Frame.Sel                       Frame.selcol = Frame.SelCol                 Frame.selrow = Frame.SelRow
 Frame.delete/remove = Frame.Del             Frame.groupv = Frame.GroupV                 Frame.splith = Frame.SplitH
@@ -50,6 +50,7 @@ series.mean(axis=0),series.median(axis=0),series.sum(axis=0)
 series.corr(other, method='')
 
 mergelr = MergeLR                           concatvh = ConcatVH
+read/x = Read/x, save/x = Save/x, [fr,sr] = play/Play
 Frame.tolist(), Frame.list()<--homebrew     Series.tolist(), Series.list()   <--exisiting method in pandas
 General notes on "join":
     when joining along an axis, the index of each frame does not have to in the same order
@@ -1152,6 +1153,93 @@ def ConcatVH(frameList, axis=0, join="union", sort=False):
 
         return sorted.ReorderCols(unsortedOrder) if axis == 0 else sorted.ReorderRows(unsortedOrder)
 
+def Read(path, sep=None, header=0, *args, **kwargs):
+        """
+        (path, sep=None, header=0, *args, **kwargs)
+        Read data into a frame. This is a class method.
+        Args:
+            path, a text or csv file
+            sep, character used to separate the file
+                 auto mode: (when sep=None which is default)
+                     if path is txt, auto sep='\t'
+                     else (e.g., csv) auto sep=','
+                 user mode: 
+                     user explicitly specifies sep=''
+            header, the row number with header (0=first row, None=no header at all)
+        Returns:
+            a Frame object with the data
+        Raises:
+           None
+        """
+        if sep == None:
+            if path.endswith('.txt'): 
+                sep = '\t'
+            else:
+                sep = ','
+        else:
+            sep = sep
+        return pd.read_table(path, sep=sep, header=header, *args, **kwargs)
+    
+def Readx(path, sheet=0, header=0, *args, **kwargs):
+    """
+    (path, sheet=1, header=0, *args, **kwargs)
+    Read xlsx, xls file into a frame
+    Args:
+        path, a xlsx, xls file file
+        sheet, either sheet number (the first is 0) or sheet name (e.g., Sheet1)
+        header, the row number with header (0=first row, None=no header at all)
+    Returns:
+        a Frame object with the data
+    Raises:
+       None
+    """
+    #hack pd.read_excel in pandas 0.12.0 which only supports sheet name not number
+    if type(sheet) in [int,numpy.int32,numpy.int64]:
+        import xlrd
+        workbook = xlrd.open_workbook(path)
+        sheetNames = workbook.sheet_names()
+        sheetName = sheetNames[sheet]
+    else:
+        sheetName = sheet
+    #hack end
+    return pd.read_excel(path, sheetname=sheetName, header=header, *args, **kwargs)
+
+def Save(theFrame, outputFile, columns=None, float_format="%.6f"):
+    """
+    (theFrame, outputFile, columns=None, float_format="%.6f")
+    Save the content of a frame to an excel or csv file.
+    Args:
+        the path to the excel file (xlsx/xls), or csv(.csv, comma separated); explicitly specify .xlsx/xls or .csv 
+            xls (but not xlsx) may be more compatible with old-version software (spss v20)
+            however, xls limited to 256 columns by 65536 rows
+            in which case, consider csv as an alternative
+            or xlsx which has limits of 16,384 columns by 1,048,576 rows
+            csv writing is much faster than xlsx
+        optional columns, the order and names of columns to save
+            1) can reorder or omit some of the frame's original columns
+            2) if skipped, use the frame's original order and names
+            3) example: columns=["sbj","Wordpair","UResp","recalled","stage"]
+    Returns:
+        None
+    Raises:
+        None
+   """
+    if outputFile.endswith('.csv'):
+        theFrame.to_csv(outputFile, sep=',', na_rep='', float_format=float_format, cols=columns, header=True, index=False, index_label=None, mode='w', encoding='utf-8')
+    else:
+        theFrame.to_excel(outputFile, sheet_name='Sheet1', na_rep='', float_format=float_format, cols=columns, header=True, index=False, index_label=None, startrow=0, startcol=0)
+
+def Play():
+    """
+    generate a dataframe and series to play with
+    """
+    fr = Frame.Play()
+    print ''
+    sr = Series.Play()
+    print ''
+    print 'Generate a dataframe and series to play with.'
+    print 'Use a list to catch the returned dataframe and series.'
+    return [fr, sr]
 
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # refractory to lower cases
@@ -1161,7 +1249,9 @@ from pandas import isnull as isnull
 Frame.read = Frame.Read
 Frame.readx = Frame.Readx
 Frame.save = Frame.Save
+Frame.savex = Frame.Save
 Frame.write = Frame.Save
+Frame.writex = Frame.Save
 Frame.peek = Frame.Print
 Frame.Peek = Frame.Print
 Frame.play = Frame.Play
@@ -1206,6 +1296,11 @@ Series.list = Series.tolist
 
 mergelr = MergeLR
 concatvh = ConcatVH
+read = Read
+readx = Readx
+save = Save
+savex = Save
+play = Play
 
 
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

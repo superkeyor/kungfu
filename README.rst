@@ -23,7 +23,7 @@ Visualize a single list as a series and therefore a column of a frame when conve
 However, for a list of lists, Visualize each list of the list (i.e. sublist) as a row!
 Memorization: list=series=column
 
-Frame.read(x) = Frame.Read(x)               Frame.save = Frame.Save                     Frame.write = Frame.Save
+Frame.read/x = Frame.Read/x               Frame.save/x = Frame.Save/x               Frame.write/x = Frame.Save/x
 Frame.peek = Frame.Print                    Frame.Peek = Frame.Print                    Frame.play = Frame.Play
 Frame.sel = Frame.Sel                       Frame.selcol = Frame.SelCol                 Frame.selrow = Frame.SelRow
 Frame.delete/remove = Frame.Del             Frame.groupv = Frame.GroupV                 Frame.splith = Frame.SplitH
@@ -45,6 +45,7 @@ series.mean(axis=0),series.median(axis=0),series.sum(axis=0)
 series.corr(other, method='')
 
 mergelr = MergeLR                           concatvh = ConcatVH
+read/x = Read/x, save/x = Save/x, [fr,sr] = play/Play
 Frame.tolist(), Frame.list()<--homebrew     Series.tolist(), Series.list()   <--exisiting method in pandas
 General notes on "join":
     when joining along an axis, the index of each frame does not have to in the same order
