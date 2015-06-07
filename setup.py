@@ -10,10 +10,13 @@ PACKAGE = 'kungfu'
 description='A Pandas Enhancement'
 keywords='scipy, numpy, pandas, kungfu, array, matlab, matrix, cell, cross-platform, quick, easy, wrapper'
 packages = find_packages()
-# packages.append('ez.timezone.pytz')
-# install_requires = ['django-pipeline==1.1.22', 'south>=0.7']
-# install_requires=['peppercorn']
-install_requires=['pandas==0.12.0','openpyxl==1.5.8', 'xlrd', 'xlwt']
+# reference:
+#       packages.append('ez.timezone.pytz')
+#       install_requires = ['xxx==1.1.22', 'yyy>=0.7']
+#       install_requires=['zzz']
+# numpy 1.7.1 is required by pandas 0.12.0; however some other modules require later numpy
+# pandas 0.12.0/kungfu seem to still work fine (?) with newer numpy
+install_requires=['pandas==0.12.0', 'openpyxl==1.5.8', 'xlrd', 'xlwt']
 ######################################################################################
 # Get the long description from the relevant file
 with open(path.join(here, 'README.rst'), encoding='utf-8') as f:

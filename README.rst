@@ -10,6 +10,8 @@ The above command will auto take care of the following requirements
 Requires pandas 0.12.0 (tested 0.12.0-2) which will also install python-dateutil(dateutil), numpy, pytz, six
 Requires openpyxl for writing excel (tested with 1.5.8, version 1.6.1 or higher, but lower than 2.0.0 may also work.)
 xlrd for reading excel, xlwt for writing .xls (old format) file
+numpy 1.7.1 is required by pandas 0.12.0; however some other modules require later numpy
+pandas 0.12.0/kungfu seem to still work fine (?) with newer numpy
 (pip install pandas==0.12.0; pip install openpyxl==1.5.8; pip install xlrd; pip install xlwt)
 
 Usage:
@@ -23,19 +25,26 @@ Visualize a single list as a series and therefore a column of a frame when conve
 However, for a list of lists, Visualize each list of the list (i.e. sublist) as a row!
 Memorization: list=series=column
 
-Frame.read/x = Frame.Read/x               Frame.save/x = Frame.Save/x               Frame.write/x = Frame.Save/x
+Frame has column name, row index (index, e.g., 'a','b' is not necessarily number, e.g., row 0, row 1)
+
+
+Frame.read/x = Frame.Read/x                 Frame.save/x = Frame.Save/x                 Frame.write/x = Frame.Save/x
 Frame.peek = Frame.Print                    Frame.Peek = Frame.Print                    Frame.play = Frame.Play
 Frame.sel = Frame.Sel                       Frame.selcol = Frame.SelCol                 Frame.selrow = Frame.SelRow
 Frame.delete/remove = Frame.Del             Frame.groupv = Frame.GroupV                 Frame.splith = Frame.SplitH
 Frame.recols = Frame.ReorderCols            Frame.rerows = Frame.ReorderRows            Frame.rncols = Frame.RenameCols
 Frame.newcol = Frame.NewCol                 Frame.findval = Frame.FindVal               Frame.countval = Frame.CountVal
+Frame.cols = Frame.Columns                  Frame.rows = Frame.Indices                  Frame.indices = Frame.Indices
 Frame.cnames = Frame.Columns                Frame.names = Frame.Columns                 Frame.rnames = Frame.Indices
 Frame.num = Frame.ToNum                     Frame.maskout = Frame.Maskout               # Frame.fillna = Frame.FillNA
 
 Series.play = Series.Play                   Series.peek = Series.Print                  Series.Peek = Series.Print
-Series.sel = Series.Sel                     Series.countval = Series.CountVal           # Series.unique = Series.Uniques  --existing method
-Series.len = Series.Size                    Series.names = Series.Indices               Series.rnames = Series.Indices
-Series.cames = Series.Indices               Series.num = Series.ToNum                   Series.str = Series.ToStr
+Series.sel = Series.Sel                     Series.countval = Series.CountVal         
+Series.len = Series.Size                    # Series.size built-in property
+Series.uniques = Series.Uniques             # Series.unique --existing method
+Series.cols = Series.Indices                Series.rows = Series.Indices                Series.indices = Series.Indices
+Series.names = Series.Indices               Series.rnames = Series.Indices              Series.cames = Series.Indices
+Series.num = Series.ToNum                   Series.str = Series.ToStr
 Series.maskout = Series.Maskout             # Series.fillna = Series.FillNA
 
 from pandas import isnull as isna
@@ -69,10 +78,10 @@ groupby().groups  is a dict whose keys are the computed unique groups
 
 
 Loop how to:
-for columnName, columnSeries in Frame.iteritems():
-    columnIndex = Frame.Columns().index(colName)
-    columnUniques = columnSeries.Uniques()
-for rowIndex, rowSeries in Frame.iterrows():
+for name, col in Frame.itercols():
+    # name is column name, col is a series
+for index, row in Frame.iterrows():
+    # index is row index (not necessarily number), row is a series
 for index, value in Series.iteritems():
 
 Also consider apply, applymap, map
