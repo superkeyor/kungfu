@@ -173,7 +173,7 @@ class PatchedFrame(Frame):
     @classmethod
     def Readx(cls, path, sheet=0, header=0, *args, **kwargs):
         """
-        (path, sheet=1, header=0, *args, **kwargs)
+        (path, sheet=0, header=0, *args, **kwargs)
         Read xlsx, xls file into a frame
         Args:
             path, a xlsx, xls file file
