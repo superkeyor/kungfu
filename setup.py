@@ -16,7 +16,7 @@ packages = find_packages()
 #       install_requires=['zzz']
 # numpy 1.7.1 is required by pandas 0.12.0; however some other modules require later numpy
 # pandas 0.12.0/kungfu seem to still work fine (?) with newer numpy
-install_requires=['pandas==0.12.0', 'openpyxl==1.5.8', 'xlrd', 'xlwt']
+install_requires=['pandas==0.12.0', 'openpyxl==1.5.8', 'xlrd', 'xlwt', 'xlsxwriter']
 ######################################################################################
 # Get the long description from the relevant file
 with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
